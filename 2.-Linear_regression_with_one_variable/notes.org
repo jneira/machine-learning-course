@@ -1,0 +1,39 @@
+* Model Representation
+  - Supervised Learning:
+    - Given the "right answer" for each example in the data.
+  - Regression Problem:
+    - Predict real-values output
+  - Data set is called "Training set"
+  - Notation:
+    - m = Number of training examples
+    - x's = "input" variable/features
+    - y's = "output" variable/"target" variable
+    - (x,y) = one training example
+    - (x[i],y[i]) = i^th training example
+  - Model:
+                                           x
+                                           |  
+  Training Set --> Learning Algorithm --> /h/ (hypothesis)
+                                           | 
+                                           y
+  h: function x->y
+ 
+  - How do we represent h? *as a linear function*
+    - h[Θ](x) = Θ[0]+Θ[1]x Shorthand: h(x)  
+    - To start with a simple building block
+  - Model name:
+    - Linear regression with one variable.
+    - aka Univariate linear regression.
+
+* Cost function
+  - How to choose Θ[i]'s parameters in hypothesis
+  - Idea: choose Θ[0],Θ[1] so that hΘ(x) is close to /y/ for our
+    training examples (x,y)
+  - Formalization:
+    - minimize J(Θ[1],Θ[2])=1/2m Σ(i=1..m)(h[Θ](x^(i))- y^(i))^2
+    - h[Θ](x^(i))=Θ[0]+Θ[1]x^(i)
+    - choose values for Θ[0],Θ[1] that minimez the function
+    - m -> #training examples
+    - squared error cost function
+
+* Cost function - Intuition I
