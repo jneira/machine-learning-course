@@ -1,0 +1,66 @@
+* Multiple Features
+  - x[n] to name features/variables and y for output variable
+  - n = number of features.
+  - x[i]=input(features) of ith training example.
+  - x[i][j]=value of feature j in ith training example.
+  - x[2]=[1416;3;2;40] x[1]=1416
+  - hypothesis: h[Θ](x)=Θ[0]+Θ[1]x[1]+Θ[2]x[2]+...+Θ[n]x[n]
+  - x[0]=1 x[i][0]=1
+  - x = [x[0];x[1];x[2];...;x[n]] ∈ R[n+1]
+  - Θ = [Θ[0];Θ[1];Θ[2];...;Θ[n]] ∈ R[n+1]
+  - h[Θ](x)=transpose(Θ)*x
+* Gradient Descent for Multiple Variables
+  - Hypothesis:
+    h[Θ](x)=transpose(Θ)*x=Θ[0]x[0]+Θ[1]x[1]+Θ[2]x[2]+...+Θ[n]x[n]
+  - Parameters Θ (n+1 dimension vector)
+  - Cost function: J(Θ)=1/2m Σ(i=1..m)(h[Θ](x^(i))-y^(i))^2
+  - Gradient descend: Repeat {Θ[j]:=Θ[j]-α J(Θ)}
+  - Gradient descend with n variables (instead only 2):
+    - Repeat { Θ[j]:=Θ[j]-α 1/m Σ(i=1..m)(h[Θ](x^(i))-y^(i))x[j]^(i) }
+    - Remember x[0]^(i)=1
+* Gradient descent in practice II: Feature Scaling
+  - Ferature scaling: features should be on similar scale -> 
+                      gradient descend converge quickly
+  - Every feature into approximately a -1 <= x[i] <= 1
+  - Scaling dividing each fetaure by its range
+  - Normalization: replace x[i] with x[i]-μ[i]/s[1] (no apply  to x[0]=1)
+                   μ[1] = avg value of x[1] in training set
+                   s[1] = range (max-min) (standar deviation)
+* Gradient descent in practice II: Learning Rate
+  - Debugging gradient descent to comprobe is working correctly.
+  - J(Θ) should decrease after every iteration.
+  - if it doesnt work (increase or oscille) use smaller α
+  - Declare convergence if J(Θ) decreases by less than 10^(-3) 
+  - For sufficiently small α, J(Θ) should decrease on every iteration
+  - But if α is too small, gradient descent can be slow to converge
+  - To choose α, try a range of values scaling 3*
+* Features and polynomial regression
+  - Other functions to fit data: quadratic,_cubic_
+  - h[Θ](x)=Θ[0]+Θ[1]x[1]+Θ[2]x[2]+Θ[3]x[3] 
+  -      / x[1]=(size),x[2]=(size)^2,x[3]=(size)^3
+* Normal equation
+  - Method to solve for Θ analytically
+  - Make a matrix with the features (X) or design matrix  and a vector
+    for y's (Y)
+  - X -> dim m x (n+1) |  Y=dim m / m=num de examples y n=num
+    variables
+  - Θ=(X^T*X)^-1*X^Ty
+  - (X^T*X)^-1 -> pinv(X´*X)*X´*y (octave)
+  - Feature scaling is not needed
+  - Comparation:
+    - Gradient Descent: 
+      - Need to choose α
+      - Needs many iterations
+      - Works well even when n is large n~=10^6
+    - Normal Equation
+      - No need to choose α
+      - Don't need to iteration
+      - Need to compute: pinv(X´*X) O(n^3)
+      - Slow if n is very large
+* Normal Equation Noninvertibility
+  - Only some matrices are invertible
+  - What if pinv(X´*X) is non-invertible? (singular/degenerate)
+    - Redundant features (linearly dependent)
+      - Delete the features linearly dependent
+    - Too many features (m<=n)
+      - Delete some features, or use regularization (later)

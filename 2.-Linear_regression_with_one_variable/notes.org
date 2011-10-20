@@ -37,3 +37,36 @@
     - squared error cost function
 
 * Cost function - Intuition I
+* Gradient descent.
+  - Have some function J(Θ[0],Θ[1])
+  - Want min(Θ[0]..Θ[2]) J(Θ[1],Θ[2])
+  - Outline:
+    - Start with some Θ[0],Θ[1]
+    - Keep changing Θ[0],Θ[1] to reduce J(Θ[0],Θ[1]) until we
+      hopefully end up at a minimum-
+  - repeat until convergence {
+      Θ[j]:=Θ[j]-α δ/δΘ[j] J(Θ[0],Θ[1]) (for j=0 and j=1)
+    }
+    - α: learning rate
+  - Correct: Simultaneous update
+    - temp0:= Θ[0]-α δ/δΘ[0] J(Θ[0],Θ[1])
+    - temp1:= Θ[1]-α δ/δΘ[1] J(Θ[0],Θ[1])
+    - Θ[0]:=temp0
+    - Θ[1]:=temp1
+      
+* Gradient descent intuition
+  - With learning rate small -> maybe too much steps
+                       high -> maybe skips the minimum and dont
+                               converge
+  - Gradient descent can converge to a local minimum, even with the
+    learning rate α fixed. As we approach a local minimum, gradient
+    descent will automatically take smaller steps. So, no needs to
+    decrease α over time.
+* Gradient Descent For Linear Regression
+  - δ/δΘ[j] J(Θ[0],Θ[1]) = 
+            δ/δΘ[j] 1/2m Σ(i=1..m)(h[Θ](x^(i))-y^(i))^2=
+            δ/δΘ[j] 1/2m Σ(i=1..m)(Θ[0]+Θ[1](x^(i))-y^(i))^2
+  - Θ[0]j=δ/δΘ[0] J(Θ[0],Θ[1])=1/m Σ(i=1..m)(h[Θ](x^(i))-y^(i))
+  - Θ[1]j=δ/δΘ[1] J(Θ[0],Θ[1])=1/m Σ(i=1..m)(h[Θ](x^(i))-y^(i))*x^(i)
+  - Batch GRadient Descent: Each step of gradient descent uses all the
+    training examples(Σ)
