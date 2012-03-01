@@ -1,0 +1,24 @@
+* Non-linear hypothesis
+  - Rationale: complex non-lnear hypothesis
+  - Case: non-linear classification with many features to build
+    quadratic combinations, n features -> ~5000 with quadratic
+    combinations. Growth O(n^2) (n number of original features)
+  - With cubic combinations O(n^3)
+  - Example of complex non-linear hypothesis with many features:
+    computer vision
+* Neurons and the brain
+* Model representation I
+  - bias unit -> X[0]=1
+  - neuronetro -> activation function
+  - weights -> paremeters
+  - first layer -> input -> features
+  - last layer -> output -> h[theta](x)
+  - middle layer -> hidden
+  - a[i,j] = "activation" of unit i in layer j
+  - theta[j]=matrix of weights controlling function mapping from layer
+    j to layer j+1
+  - If network has s[j] units in layer j,s[j+1] units in layer j+1,
+    then theta[j] will be of dimension s[j+1] x (s[j]+1)
+* Model representation II
+* Intuition I
+

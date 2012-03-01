@@ -1,0 +1,55 @@
+* Learning with large datsets
+  - Useful to increase accuracy of low-bias algorithms
+  - Specific computational problems
+  - Algorithms to substitute gradient descent or to calculate
+    derivatives.
+  - Check: test if algorithm has high variance for a small dataset
+* Stochastic Gradient Descent
+  - Modification over (batch) gradient descend
+  - cost(Theta,(x[i],y[i]))=1/2 (h[Theta](x[i])-y[i])^2
+  - J[train](Theta)=1/m ∑(i=1..m) cost(Theta,(x[i],y[i]))
+  - Algorithm:
+    - Randomly shuffle dataset
+    - Repeat {
+        for i=1..m {
+          Theta[j]=Theta[j]-alpha*(h[theta](x[i])-y[i])*x[i,j] 
+          (for j=0..n)
+        } 
+* Mini-Batch Gradient Descent
+  - A bit faster than previous one
+  - Batch gradient descend: Use all m examples in each iteration
+  - Stochastic gradient descent: Use 1 example in each iteration
+  - Mini-batch gradient descent: Use b examples in each iteration
+    - b = mini-batch size values: b=10 
+    - Theta[j]=Theta[j]-alpha*1/10*∑(k=1..i+a) 
+               (h[theta](x[k]-y[k])*x[j,k]
+    - you have to choose param b
+    - with vectorized impl can be faster than previous one
+* Stochastic Gradient Descent Convergence
+  - Batch gradient descent:
+    - Plot Jtrain(Theta) as a function of ther number of iterations of
+      gradient descent
+    - Jtrain(Theta)=1/2m * ∑(i=1..m) (hTheta(x[i])-i[i])^2
+  - Stochastic gradient descent:
+    - cost(Theta,(x[i],y[i]))=1/2(hTheta(x[i]-y[i])^2
+    - during learning, compute cost(Theta,(x[i],y[i]) before updating
+      Theta using (x[i],y[i])
+    - Every 1000 iterations (say), plot cost(Theta,(x[i],y[i]))
+      averaged over the last 1000 examples processed by algorithm
+   - Stochastic GD dont reach exactly the global minimum
+   - you can slowly decrease alpha over time i we want Theta to
+     converge (e.g. alpha=const1/iterationNumber+const2)
+* Online Learning
+  - Handle a continuous stream of data
+  - Example: continous data from website users used to modify options
+  - Repeat forever {
+    - get (x,y) 
+    - update Theta using (x,y):
+      - Theta[j]:=Theta[j]-alpha*(hTheta(x)-y)*x[j]
+    - discard example
+  - you can discard it cause you have a lot of data
+  - Application: learning to apropos good search results
+* Map Reduce and Data Parallelism
+  - Run algorithm in multuple computers-cores
+  - Map-reduce: when algorithm can be expressing as computing sums of
+    functions over the training set

@@ -1,0 +1,78 @@
+* Classification
+  - algorithm (logistic regresssion)
+  - y has discrete values (if two: 0 negative class/1 positive class)
+  - y can have n classes (multiclass classification problema)
+  - with linear regression
+  - Thresholh classifier outpu h[theta](x) at 0.5
+    - If h>=0.5 -> y=1
+    - If h < 05 -> y=0
+  - Logistic regression: 0 =< h[theta](x) <=1
+* Hypothesis representation
+  - h[theta](x) = g(theta'*x)
+  - g(z)=1/(1+e^-z) (sigmoid function)
+  - h[theta](x) =1/(1+e^(-theta'*x))
+  - We need a value for theta params
+  - h[theta](x) = estimated probablility that y=1 on input x
+  - h[theta](x) = P(y=1|x;theta) ~= "probability that y=1, given x,
+    parametized by theta"
+  - P(y=0|x;theta) = 1 - P(y=1|x;theta)
+* Decision boundary
+  - g(z)>=0.5 when z>=0
+  - h[theta](x)= g (theta'*x) >= 0.5
+  - whenever tehta'x>=0
+  - predict "y=1" if h[theta](x)>= 0.5
+    - theta'x>=0
+  - predict "y=0" if h[theta](x)< 0.5
+    - theta'x<0
+  - decision boundary theta'x=0 -> h[theta](x)= 0.5
+  - It's a property of the hypothesis and its chosen params no of the
+    data
+  - Non linear decision boundaries with polynomial hypothesis
+    (x^2,x^3,..)
+* Cost function
+  - Training set: {(x[1],y[1]),...,(x[m],y[m])}
+  - m examples x ∈ [x[0];x[1];...;x[n]] x[0]=1, y ∈ {0,1}
+  - h[theta](x)=1/(1+e^(-theta'*x))
+  - Linear/logistic regression: 
+    - J(theta)=1/m ∑ (i..m) cost(h[theta](x[i]),y)
+    - cost(h[theta](x),y)=1/2(h[theta](x)-y)^2 
+  - with h[theta](x)=1/1+e^(-theta'*x) the cost function is no-convex
+    and has multiple local minimumss
+  - Another cost function convex:
+    - cost(h[theta](x),y)=
+      -log(h[theta](x)) if y=1
+      -log(1-h[theta](x)) if y=0
+* Simplified Cost Function and Gradient Descent
+  - cost(h[theta](x),y)= -y*log(h[theta](x))-(1-y)*log(1-h[theta](x))
+  - equivalent to previous version
+  - derivable from the principle of maximum likelihood estimation
+  - min[theta]J(theta)
+  - Gradient descend:
+    - Repeat {
+        theta[j]:=theta[j]-alpha*∑ (1..m) (h[theta](x[i])-y[i])x[i][j] 
+      }
+  - Algorithm is identical to linear egression but
+    h[theta](x)=1/1+e^(-theta'* x)
+  - Feature scaling is good to gradiente descend too
+* Advanced optimization 
+  - Given theta, we have code that can compute:
+    - J(theta)
+    - deriv(J(theta))
+  - Optimizations algorithms:
+    - Gradient descent
+    - Conjugate gradient
+    - BFGS
+    - L-BFGS
+  - Advantages:
+    - No need to pock alpha manually:
+      - They have a interloop to choose the best alpha
+    - Faster
+  - Disadvantages:
+    - More complex
+* Multi-class classification One-vs-all
+  - Examples: email foldering/tagging, weather prediction
+  - Divide n class in n one vs rest classification problem
+  - Train a logistic regression classifier h[theta][i](x) for each
+    clas i to predict the probability that y=i
+  - On a new input x, to make a prediction, pick the class i that
+    maximizes: max h[theta][i](x)

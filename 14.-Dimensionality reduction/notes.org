@@ -1,0 +1,30 @@
+* Motivation I: Data Comprension
+  - And speed up learning algorithm
+  - Example: reduce data from 2d to 1d
+    - Two features closely related
+* Motivation II: Visualization
+  - Visualize the data -> helps to understand it
+  - Reduce 50 dims to 2 dims to plot it
+* Principal Component Analysis Problem Formulation
+  - PCA tries to find the optimal lower dimensional surface to project
+    the data
+  - Minimize the distance between points and theirs projections
+    (projection error)
+  - Find a direction (k vector u[1],u[2],..u[k] ∈ R^n) onto which to project the data
+    so as to minimize the projection error
+  - Diffs with linear regression
+* Principal Component Analysis Algorithm
+  - Data preprocessing: feature scaling/mean normalization
+    - replace x[i,j] with x[i,j]-mu[j]=1/m ∑(i=1..m) x[i,j]
+  - Steps: get vectors defining the projection surface and the
+    projections
+  - Reduce data from n-dimensions to k-dimensions:
+    - compute "covariance matrix": Sigma=1/m ∑(i=1..n)(x[i])(x[i])'
+    - compute "eigenvectors" of matrix Σ: [U,S,V]=svd(Sigma) (single
+      value decomposition)
+    - take k u eigenvectors
+* Choosing the Number of Principal Component
+  - Guidelines to choose paramter k of PCA
+  - Average squared projection error: 
+    1/m ∑(i=1..m) ||x[i]-x[i,approx]||^2
+  - Total variation in the data: 1/m ∑(i=1..m) ||x[i]||^2

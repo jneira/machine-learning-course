@@ -1,0 +1,17 @@
+* Prioritzing What to Work On
+* Error analysis
+  - start with a simply and quick algorithm
+  - plot learning curves
+  - error analysis: manually examine the examples to extract patterns
+* Error metrics for skewed classes
+  - skewed: extreme ratio +/- examples
+  - precision=true positives/predicted positives=
+              true positives/true pos+false pos
+  - recall=true positives/actual positive=
+           true positives/true pos+false neg
+* Data For Machine Learning
+  - Amount data more important than algorithm performance. Assuming:
+    - Feature x has sufficient information to predict y
+    - Test useful
+    - Very complex functions -> low bias
+    - Very large training set -> low variance

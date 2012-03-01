@@ -1,0 +1,45 @@
+* Problem Formulation
+  - Notation:
+    nu= no. users
+    nm= no. movies
+    r(i,j)=1 if user j has rated movie i
+    y[i,j]=rating given by user j to movie i (if defined)
+* Content Based Recommendations
+  - The algorithm can choose auto what features to use
+  - We can categorize films inferring categories from user ratings
+  - Given Theta (category rates) and Y (films rates) infer X (film
+    category)
+  - Given Theta[1..nu], to learn x[i]:
+    - min/x[i] 1/2 ∑(j:r(i,j)=1) ((Theta[j])'*x[i]-y[i,j])^2+
+                                 lambda/2* ∑(k=1..n)(x[i,k])^2
+  - To learn x[1..nm]:
+    - min/x[i..nm] 1/2 ∑(i=1..nm) ∑(j:r(i,j)=1) 
+                         ((Theta[j])'*x[i]-y[i,j])^2+
+                          lambda/2* ∑(i=1..nm)∑(k=1..n)(x[i,k])^2
+  - Collaborative filtering:
+    - Given Theta you can estimate X
+    - Given X you can estimate Theta
+    - Choose random init values for theta and inititate the iterative
+      proccess to improve the estimation: Theta -> X -> Theta -> ...
+  - Its possible cause various movies are rating by various users
+* Collaborative Filtering Algorithm
+* Collaborative Filtering Algorithm
+  - Minimizing X[1..nm] and Theta[1..nu] simultaneously
+  - Steps:
+    1.- Initialize X y Theta to small random values.
+    2.- Minimize J(X,Theta)
+    3.- For a user with parameters Theta and a movie with (learned)
+    features x, predict a star rating of Theta'*X
+* Vectorizacion: low rank matrix factorization
+  - Matrix Y with user/films ratings
+  - Predictions X*Theta' - Low rank matrix factorization
+  - Finding related movies:
+    - For each product i,we learn a feature vector x[i] ∈ R^n
+    - The features auto capture the important aspects of products
+    - small ||x[i]-x[j]||, similarity between product i and j
+* Mean normalization
+  - Movies not rated for users -> the predicted rating is 0 (no real)
+  - Compute average rating of each movie in mu.
+  - Substract the average in each column of ratings
+  - For user j, on movie i predict: Theta[j]'*X[i]+mu[i]
+  - For no ratings the value predicted will be the average mu

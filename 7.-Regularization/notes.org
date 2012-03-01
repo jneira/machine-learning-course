@@ -1,0 +1,52 @@
+* The problem of overfitting
+  - Underfitting/High bias:
+    - When linear regression dont fit the data
+    - The algorithm has a very strong preconeption or bias the data has
+      has to vary linear
+  - Overfitting/High variant:
+    - Fits the data very well with many features
+    - Very variability, fail to predict new examples
+    - Need more data to make good predictions
+  - Addresing overfitting:
+    - Options:
+      - 1.- Reduce number of features:
+        - Manually selected which features to keep
+        - Automatically selection algotiyhm (later)
+      - 2.- Regularization.
+        - Keep all the features, but reduce magnitude/values of
+          parameters theta[j]
+        - Works well when we have a lot of features, each of them
+          contibutes a bit to predicting y.
+* Cost function
+  - Penalize some ot theta params in cost function to minimize them
+    close to 0 and avoid overfitting
+  - Small values for paremeters theta[0],theta[1],...,theta[n]
+    - "Simpler" hypothesis
+    - Less prone to overfitting
+  - We cant choose which params to shrink -> shrink all
+  - Adding a term to the cost function:
+    - J(theta)=1/2m [∑ (i=1..m) (h[theta](x[i])-y[i])^2+ 
+                                λ ∑ (i=1..m) theta[j]^2]
+    - thetà[0] no included
+    - λ: regularization param
+    - 2 objectives: fit training data and regularize to get a simple
+      hypothesis
+    - λ too large: underfitting: h[theta](x) = theta[0]=1 (flat line)
+    - automacally ways to choose λ
+
+* Regularized linear regression
+  - theta[j]:= theta[j]*(1-α * λ/m)- α * 1/m 
+               ∑ (i=1..m) (h[theta](x[i])-y[i])x[i][j]
+  - (1-α * λ/m) < 1
+  - normal equation: 
+    - theta=pinv(X'X+λ[[0 0 0][0 1 0][0 0 1]])*X'*y
+  - non invertibility
+    - suppose m(examples)<=n(features)
+    - if λ>0 pinv(X'X+λ[[0 0 0][0 1 0][0 0 1]])*X'*y
+    - it's demonstrable that X'X+λ[[0 0 0][0 1 0][0 0 1]] is always
+      invertible
+* Regularized logistic regression
+  - Same as linear  
+  
+
+    

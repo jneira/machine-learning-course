@@ -1,0 +1,42 @@
+* Unsupervised Learning: Introduction 
+  - Work with data no labeled (without y)
+  - The algorithm finds some structure, pattern  in data
+  - The clusterin algorithm separate data in clusters
+* K-Means Algorithm
+  - Choose n random point (cluster centroids) with n=numer of clusters
+  - 1.- Divide the examples by proximity to the centroids.
+  - 2.- Move the centroids.
+  - Formally:
+    - Input:
+      - K (number of clusters)
+      - Training set {x[1],x[2],...,x[m]}
+      - x[i] ∈ R^n (drop x[0]=1 convention)
+    - Randomly initialise K clusters centroids
+      mu[1],mu[2],...,mu[k] ∈ R^n
+    - Repeat {
+        for i=1 to m
+            c[i]:= index (from 1 to k) of cluster centroid closest to
+                   x[i] -> c[i]=minimize ||x[i]-mu[k]||^2
+        for k= 1 to K
+            mu[k]:=average (mean) of points assigned to cluster k
+      }
+    - K-means for non-separated cluster
+* Optimization objective
+  - c[i]=index of cluster (1,2,..,K) to which example x[i] is
+    currently assigned
+  - mu[k]=cluster centroid k (mu[k] ∈ R^n)
+  - mu[c,i]=cluster centroid of cluster to  which example x[i] has
+    been assigned
+  - J=1/m ∑(i=1..m)=||x[i]-mu[c,i]||^2
+  - Called the distortion cost
+  - 1 step: minimize J with c[1..m] parametized (mu[1..k] fixed)
+  - 2 step: minimize J with mu[1..K] parametized (c[1..m] fixed)
+  - Called dispulsion fucntion, used to:
+    - debug K algorithm
+    - avoid local minimums and to choose 
+* Random Initialization
+  - How to choose initial centroids and how to avoid local optimals
+  - Random init:
+    - should have K<m
+    - randomly pick K training examples
+    - set mu[1..K] equal to these K examples

@@ -1,0 +1,79 @@
+* Problem motivation
+  - It's a unsupervised problem but has aspects of supervised one
+  - The data have no labels
+  - Dataset: {x[1],x[2],...,x[m]}
+  - Is xtest anomalous?
+    - Model p(x) with probabilities
+    - p[xtest] < epsilon -> flag anomaly
+    - p[xtest] >= epsilon -> OK
+  - Use cases: 
+    - Fraud detection in web apps
+    - Manufacturing engines
+    - Monitoring computers in data center
+* Gaussian Distribution
+  - aka Normal Distribution
+  - x ∈ R. x is a distributed Gaussian with mean mu, variance sigma2
+    (or standar deviation)
+  - x ~ N(mu,sigma2)
+    - mu parametize the center of gaussian bell
+    - sigma the width of gaussian probability
+  - p(x;mu,sigma2)
+  - mu is the mean parameter (center of distribution)
+    - mu=1/m * ∑(i=1..m)x[i]
+  - sigma2=1/m ∑(i=1..m)(x[i]-mu)^2
+* Algorithm
+  - p(x)=p(x[1];mu[1],sigma2[1])*...* p(x[n];mu[n],sigma2[n])
+  - Independence assumption values of the features x[1] through x[n]
+  - But works well wether or not these features are dependent or
+    independent
+  - ∏(j=1..n) p(x[j];mu[j],sigma2[j])
+  - Problem of density estimation
+  - Algorithm:
+    1.- Choose features x[i] that you think might be indicative of
+    anomolous examples.
+    2.- Fit parameters mu[1],...,mu[n],sigma2[1],...,sigma[n]
+      - mu[j]=1/m ∑(i=1..m) x[i,j]
+      - sigma2[j]=1/m ∑(i=1..m) (x[i,j]-mu[j])^2
+    3.- Given new example x,compute p(x):
+      - p(x)= ∏(j=1..n) p(x[j];mu[j],sigma2[j])=
+            = ∏(j=1..n) 1/sqrt(2*pi) exp(-(x[j]-mu[j])^2/2*sigma2[j])
+      - Anomaly if p(x)<epsilon
+* Developing and Evaluating an Anomaly Detection System
+  - f.e.: Evaluate if a feature improves or not the algorithm
+  - We have sone labeled data, of anomalous and non-anomalous examples
+    to evaluate the algorithm (although the algorithm is unsupervised) 
+  - The training set: x[1],...,x[m] most of all normal
+  - Cross validation and test sets with some anomolous examples
+  - Proccess:
+    - Fit model  p(x) on training set
+    - On each cross validation/test example x,predict:
+      - y=1 if p(x) < epsilon (anormaly)
+      - y=0 if p(x) >= epsilon (normal)
+    - Compare with labels of the set and use it to evaluate the
+      añgorithm
+    - The dataset is skewed so accuracy is not a good eval metric
+    - F1 score -> Precision/Recall
+    - Choose epsilon whoch maximizes F1 score
+* Anomaly Detection vs. Supervised Learning
+  - when to use one or another:
+    - Anomaly detection:
+      - Very small number of positive examples (y=1). (0-20 is
+        common).
+      - Large number of negative (y=0) examples.
+      - Many different types of anomalies. Hard to predice for the
+        algorithm from positive examples 
+    - Supervised learning:
+      - Large number of positive and negative examples
+* Choosing What Features to Use
+  - Non-gaussian fetures: features which dont fit the gaussian bell
+    shape
+  - The algorithm works with those features but better with more
+    gaussian data
+  - log(x+k) is a way to make data more gaussian
+  - x^1/k is another
+  - Error analysis for anomaly detection:
+    - when a anomalous example is inside the gaussian bell
+      p(x) is comparable for normal and anomalous examples
+    - add extra features to fix it inspired in those examples
+     
+

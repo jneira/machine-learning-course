@@ -1,0 +1,82 @@
+* Deciding what to do next
+  - Given a wrong hypothesis (doesnt fit new examples)
+  - Possible actions:
+    - more trainer examples (maybe too cost eith no result)
+    - smaller sets of features to prevent overfitting
+    - additional features 
+    - adding polynomial features
+    - modify lambda the regularization param (inc or dec)
+   - Evaluate actions and diagnostic the learning algorithm to gain
+     guidance as as to how best to improve its performance
+* Evaluating your hypothesis
+  - how to detec overfitting with many variables
+  - method:
+    - split data (randomly) in two: training set (70%) and test set(30%)
+    - the training error J(theta) will be low and the test set error
+      J[test](theta) to be low
+    - Learn parameter theta from training data (minimizing training
+      error J(theta))
+    - Compute test set error: J[test](theta)
+      - J[test](theta)=1/2m[test] ∑(i=1..m[test]) 
+                       (h[theta](x[test][i])-y[test][i])^2
+      - J[test](theta)=-1/m[test] ∑(i=1..m[test]) 
+                        y[test][i] log h[theta](x[test][i])+ 
+                        (1-y[test][i]) log h[theta](x[test][i]
+        - Misclassification error (0/1)
+          err(h[theta][x],y)= 1 if h[theta](x)>=0.5, y=0
+                                or if h[theta](x)<0.5 y=1
+                              0 otherwise
+          test error=1/m[test] ∑(i=1..m[test]) 
+                     err(h[theta](x[test][i]),y[test][i])
+
+* Model Selection and Train Validation Test Sets 
+  - Model selection (choose polynomial degree d)
+    1. h[theta](x)=theta[0]+theta[1]x
+    2. h[theta](x)=theta[0]+theta[1]x+theta[2]x^2
+    3. h[theta](x)=theta[0]+...+theta[3]x^3
+    ...
+    10. h[theta](x)=theta[0]+theta[1]x+theta[10]x^10
+  - Train theta for each degree and test
+  - 60% train data, 20% cross validation error, 20% test error
+  - Choose the model with lesser error against cross validation error
+* Diagnosing Bias vs. Variance
+  - Bias (underfit): 
+    - J[train](theta) will be high
+    - J[cv](theta) ~= J[train](theta)
+  - Variance (overfit):
+    - J[train] will be low
+    - j[cv] (theta) high
+* Regularization and Bias Variance
+  - Large λ: high bias (underfit)
+  - Intermediate λ: "just right"
+  - Small λ: high variance (overfit)
+  - Choosing λ:
+    1. Try λ=0     -> minTheta J(theta) -> theta[1] -> J[cv](theta[1])
+    2. Try λ=0.01
+    3. Try λ=0.02
+    4. Try λ=0.04
+       ...
+    12. Try λ=10   -> minTheta J(theta) -> theta[12] ->
+        J[cv](theta[12])
+* Learning Curves
+  - J[train](theta)=1/2m ∑ (i=1..m) (h[theta](x[i])-y[i])^2
+  - J[cv](theta)=1/2m[cv] ∑ (i=1..m[cv]) (h[theta](x[cv,i])-y[cv,i])^2
+  - Funtion of training set size / error of train set and error of
+    cross validation set
+  - Error of training set increases with size of m and one of the cv
+    set decreases
+  - High bias: J[cu] and J[train] high and similar and adding data dont help
+  - High variance: J[cu] high and J[train] low. More data may help
+* Deciding what to do next
+  - Given a wrong hypothesis (doesnt fit new examples)
+  - Possible actions:
+    - more trainer examples -> fixes high variance
+    - smaller sets of features to prevent overfitting -> fixes high variance
+    - additional features -> fixes high bias
+    - adding polynomial features -> fixes high bias
+    - modify lambda the regularization param:
+      - dec -> fixes high bias
+      - inc -> ""    high variance
+   - Evaluate actions and diagnostic the learning algorithm to gain
+     guidance as as to how best to improve its performance
+   - Small neura
