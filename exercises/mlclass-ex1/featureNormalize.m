@@ -10,6 +10,10 @@ X_norm = X;
 mu = zeros(1, size(X, 2));
 sigma = zeros(1, size(X, 2));
 
+% by @dnene
+% x_size = length(X);
+% X_norm = (X_norm - repmat(mu,x_size,1)) ./ repmat(sigma,x_size,1);
+
 % ====================== YOUR CODE HERE ======================
 % Instructions: First, for each feature dimension, compute the mean
 %               of the feature and subtract it from the dataset,

@@ -22,6 +22,9 @@ for iter = 1:num_iters
     theta_tmp(j)= theta(j) - (alpha/m) *  sum(((X*theta)-y).*X(:,j));
   end
   theta=theta_tmp;
+  % by @dnene
+  % theta = theta - (X' * (X * theta - y) * alpha / m);
+
     % ============================================================
 
     % Save the cost J in every iteration    
